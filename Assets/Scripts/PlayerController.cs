@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour
     {
         // Nous enregistrons un nouveau vector3 pour les axes horizontaux et verticaux (x, y, z) ce qui permet d'avoir les différents axes par défaut (projetSettings/InputManager)
         // Pour l'axe y, nous ne touchons rien car le personnage ne peut pas voler
+        // cc.Move active notre direction, toujours multiplier par Time.deltaTime pour ne pas prendre en compte les performances du système
         moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+        moveDir.y -= gravity * Time.deltaTime;
         cc.Move(moveDir * Time.deltaTime);
     }
 }
