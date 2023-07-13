@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
         moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
 
         // ### Vérification de la touche espace depuis l'InputManager ###
-        if (Input.GetButtonDown("Jump"))
+        // CharacterCoontroller.isGrounded vérifie que le personnage touche une surface solide
+        if (Input.GetButtonDown("Jump") && cc.isGrounded)
         {
             moveDir.y = jumpForce;
         }
