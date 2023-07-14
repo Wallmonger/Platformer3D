@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public CharacterController cc;
+    private CharacterController cc;
 
     // Variables pour le déplacement
     public float moveSpeed;
@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
 
     // Vecteur directionnel souahaité
     private Vector3 moveDir;
+    private Animator anim;
+    bool isWalking = false;
+
+    private void Start()
+    {
+        cc = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
+    }
 
     // GetAxis test directional arrow keys
     void Update()
@@ -39,7 +47,13 @@ public class PlayerController : MonoBehaviour
             // Slerp permet d'effectuer une rotation fluide (currentRotation, targetRotation, transitionSpeed) 
             // Look rotation prend en paramètre un new Vector3 pour calculer la rotation souhaitée
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3 (moveDir.x, 0, moveDir.z)), 0.5f);
+            isWalking = true;
+        } else
+        {
+            isWalking= false;
         }
+
+        anim.SetBool("isWalking", isWalking);
 
         // ### Déplacement ###
         cc.Move(moveDir * Time.deltaTime);
