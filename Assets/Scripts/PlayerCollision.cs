@@ -9,6 +9,8 @@ public class PlayerCollision : MonoBehaviour
     public int nbCoins = 0;
     public GameObject pickupEffect;
     public GameObject mobEffect;
+    private bool canInstantiate = true;
+
 
     // OnTriggerEnter detect all objects with the property "isTrigger(true)" in collision with the gameObject
 
@@ -35,13 +37,26 @@ public class PlayerCollision : MonoBehaviour
             
         }
 
-        if (collision.gameObject.tag == "mob")
+        if (collision.gameObject.tag == "mob" && canInstantiate)
         {
+            canInstantiate = false;
+            
             print("Damage To Mob : 5");
             GameObject go = Instantiate(mobEffect, collision.transform.position, Quaternion.identity);
             Destroy(go.gameObject, 0.6f);
             // Destroy the parent object and not only the back of the mob
             Destroy(collision.gameObject.transform.parent.gameObject);
+
+            // StartCoroutine est la seule manière d'appeler une fonction de type IEnumerator
+            StartCoroutine("ResetInstanciate");
         }
+    }
+
+    // IEnumerator est nécessaire pour mettre un script en pause
+    IEnumerator ResetInstanciate() 
+    {
+        // Patienter quelques secondes
+        yield return new WaitForSeconds(0.8f);
+        canInstantiate = true;
     }
 }
