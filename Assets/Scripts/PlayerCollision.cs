@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
@@ -10,7 +11,9 @@ public class PlayerCollision : MonoBehaviour
     public GameObject pickupEffect;
     public GameObject mobEffect;
     private bool canInstantiate = true;
-
+    public GameObject cam1;
+    public GameObject cam2;
+    public GameObject cam3;
 
     // OnTriggerEnter detect all objects with the property "isTrigger(true)" in collision with the gameObject
 
@@ -25,7 +28,42 @@ public class PlayerCollision : MonoBehaviour
             nbCoins++;
             Destroy(other.gameObject);
         }
+
+        // Gestion de la caméra
+        if(other.gameObject.tag == "cam1")
+        {
+            cam1.SetActive(true);
+        }
+        
+        else if (other.gameObject.tag == "cam2")
+        {
+            cam2.SetActive(true);
+        }
+
+        else if (other.gameObject.tag == "cam3")
+        {
+            cam3.SetActive(true);
+        }
     }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+         if (other.gameObject.tag == "cam1")
+        {
+            cam1.SetActive(false);
+        }
+        else if (other.gameObject.tag == "cam2")
+        {
+            cam2.SetActive(false);
+        }
+
+         else if (other.gameObject.tag == "cam3")
+        {
+            cam3.SetActive(false);
+        }
+    }
+
 
     // OnCollisionEnter detect all objects with the property "isTrigger(false"), solid objects
     // OnControllerColliderHit is the same, but works better with CC

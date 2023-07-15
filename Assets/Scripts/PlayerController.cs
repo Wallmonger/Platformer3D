@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
             moveDir.y = jumpForce;
         }
 
+        // Running
+        Running(12);
+
         // ### Application de la gravité ###
         moveDir.y -= gravity * Time.deltaTime;
 
@@ -57,5 +60,25 @@ public class PlayerController : MonoBehaviour
 
         // ### Déplacement ###
         cc.Move(moveDir * Time.deltaTime);
+    }
+
+    
+    void Running (int newSpeedValue)
+    {
+        if (Input.GetButtonDown("Fire3"))
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                moveSpeed = newSpeedValue;
+            }
+            else
+            {
+                moveSpeed = 8;
+            }
+        }
+        else if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = 8;
+        }
     }
 }
