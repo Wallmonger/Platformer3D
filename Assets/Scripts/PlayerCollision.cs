@@ -8,15 +8,17 @@ public class PlayerCollision : MonoBehaviour
 {
     
     public int nbCoins = 0;
+    private bool canInstantiate = true;
+    private bool isInvincible = false;
     public GameObject pickupEffect;
     public GameObject mobEffect;
-    private bool canInstantiate = true;
     public GameObject cam1;
     public GameObject cam2;
     public GameObject cam3;
     public AudioClip hitSound;
     public AudioClip coinSound;
     private AudioSource audioSource;
+    public SkinnedMeshRenderer rend;
 
     // OnTriggerEnter detect all objects with the property "isTrigger(true)" in collision with the gameObject
 
@@ -82,11 +84,14 @@ public class PlayerCollision : MonoBehaviour
     // OnControllerColliderHit is the same, but works better with CC
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
-        if (collision.gameObject.tag == "hurt")
+       
+        if (collision.gameObject.tag == "hurt" && !isInvincible)
         {
             print("You are wounded");
+            isInvincible = true;
             iTween.PunchScale(gameObject, new Vector3(0.2f, 0.2f, 0.2f), .5f);
-            
+            StartCoroutine("ResetInvincible");
+
         }
 
         if (collision.gameObject.tag == "mob" && canInstantiate)
@@ -112,5 +117,19 @@ public class PlayerCollision : MonoBehaviour
         // Patienter quelques secondes
         yield return new WaitForSeconds(0.8f);
         canInstantiate = true;
+    }
+
+
+    IEnumerator ResetInvincible () 
+    {
+        for (int i = 0; i<10; i++)
+        {
+            yield return new WaitForSeconds(.2f);
+            rend.enabled = !rend.enabled;    
+        }
+
+        yield return new WaitForSeconds(.2f);
+        rend.enabled = true;
+        isInvincible = false;
     }
 }
