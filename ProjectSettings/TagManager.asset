@@ -7,6 +7,9 @@ TagManager:
   - coin
   - hurt
   - mob
+  - cam1
+  - cam2
+  - cam3
   layers:
   - Default
   - TransparentFX
