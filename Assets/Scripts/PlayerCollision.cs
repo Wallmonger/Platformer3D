@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    
-    public int nbCoins = 0;
     private bool canInstantiate = true;
     private bool isInvincible = false;
     public GameObject pickupEffect;
@@ -40,9 +38,17 @@ public class PlayerCollision : MonoBehaviour
             audioSource.PlayOneShot(coinSound);
             GameObject go = Instantiate(pickupEffect, other.transform.position, Quaternion.identity);
             Destroy(go, 0.5f);
-            nbCoins++;
+
+            // Pattern sigleton pour accéder à une classe extérieure
+            PlayerInfos.pi.GetCoin();
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.name == "Fin")
+        {
+            print("Score final = " + PlayerInfos.pi.GetScore());
+        }
+
 
         // Gestion de la caméra
         if(other.gameObject.tag == "cam1")
@@ -89,6 +95,10 @@ public class PlayerCollision : MonoBehaviour
         {
             print("You are wounded");
             isInvincible = true;
+
+            // Utilisation de la fonction dans la classe PlayerInfos
+            PlayerInfos.pi.SetHealth(-1);
+            
             iTween.PunchScale(gameObject, new Vector3(0.2f, 0.2f, 0.2f), .5f);
             StartCoroutine("ResetInvincible");
 
