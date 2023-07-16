@@ -13,6 +13,7 @@ public class PlayerInfos : MonoBehaviour
     public Image[] hearts;
     public Text coinTxt;
     public Text scoreTxt;
+    public CheckpointMgr chkp;
 
     private void Awake()
     {
@@ -28,9 +29,11 @@ public class PlayerInfos : MonoBehaviour
         {
             playerHealth = 3;  
         }
-        if (playerHealth < 0) 
+        if (playerHealth <= 0) 
         {
             playerHealth = 0;
+            chkp.Respawn();
+
         }
 
         SetHealthBar();

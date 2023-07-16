@@ -98,8 +98,9 @@ public class PlayerCollision : MonoBehaviour
 
             // Utilisation de la fonction dans la classe PlayerInfos
             PlayerInfos.pi.SetHealth(-1);
-            
-            iTween.PunchScale(gameObject, new Vector3(0.2f, 0.2f, 0.2f), .5f);
+
+            iTween.PunchPosition(gameObject, Vector3.back * 2, .5f);
+            /*iTween.PunchScale(gameObject, new Vector3(0.2f, 0.2f, 0.2f), .5f);*/
             StartCoroutine("ResetInvincible");
 
         }
@@ -108,8 +109,8 @@ public class PlayerCollision : MonoBehaviour
         {
             canInstantiate = false;
             audioSource.PlayOneShot(hitSound);
-            iTween.PunchPosition(gameObject, Vector3.back * 5, 0.5f);
-            /*iTween.PunchScale(collision.gameObject.transform.parent.gameObject, new Vector3(50,50,50), .6f);*/
+
+            iTween.PunchScale(collision.gameObject.transform.parent.gameObject, new Vector3(50, 50, 50), .6f);
             print("Damage To Mob : 5");
             GameObject go = Instantiate(mobEffect, collision.transform.position, Quaternion.identity);
             Destroy(go.gameObject, 0.5f);
