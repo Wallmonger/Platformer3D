@@ -10,6 +10,8 @@ TagManager:
   - cam1
   - cam2
   - cam3
+  - checkpoint
+  - fall
   layers:
   - Default
   - TransparentFX

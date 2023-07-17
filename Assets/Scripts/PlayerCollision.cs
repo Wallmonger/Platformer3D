@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -10,11 +11,14 @@ public class PlayerCollision : MonoBehaviour
     private bool isInvincible = false;
     public GameObject pickupEffect;
     public GameObject mobEffect;
+    public GameObject deathEffect;
+    public bool animState = true;
     public GameObject cam1;
     public GameObject cam2;
     public GameObject cam3;
     public AudioClip hitSound;
     public AudioClip coinSound;
+    public AudioClip deathSound;
     private AudioSource audioSource;
     public SkinnedMeshRenderer rend;
 
@@ -120,6 +124,15 @@ public class PlayerCollision : MonoBehaviour
             // StartCoroutine est la seule manière d'appeler une fonction de type IEnumerator
             StartCoroutine("ResetInstanciate");
         }
+
+        if (collision.gameObject.tag == "fall" && animState)
+        {
+            rend.enabled = false;
+            animState = false;
+            GameObject go = Instantiate(deathEffect, gameObject.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(deathSound);
+            StartCoroutine("DeathAnim");
+        }
     }
 
     // IEnumerator est nécessaire pour mettre un script en pause
@@ -142,5 +155,15 @@ public class PlayerCollision : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         rend.enabled = true;
         isInvincible = false;
+    }
+
+    IEnumerator DeathAnim() 
+    {
+        yield return new WaitForSeconds(1);
+        animState = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        yield return new WaitForSeconds(1);
+        rend.enabled = true;
     }
 }
