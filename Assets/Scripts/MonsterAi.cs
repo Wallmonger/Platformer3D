@@ -9,6 +9,7 @@ public class MonsterAi : MonoBehaviour
     [Range(0.5f, 50)]
     public float detectDistance = 3;
     int destinationIndex = 0;
+    float runSpeed = 2;
     public Transform[] points;
     public Transform player;
     private NavMeshAgent agent;
@@ -38,6 +39,12 @@ public class MonsterAi : MonoBehaviour
         {
             // Player is detected
             agent.destination = player.position;
+            agent.speed = runSpeed;
+        }
+        else
+        {
+            agent.destination = points[destinationIndex].position;
+            agent.speed = 1.5f;
         }
     }
 
