@@ -9,7 +9,7 @@ public class MonsterAi : MonoBehaviour
     [Range(0.5f, 50)]
     public float detectDistance = 3;
     int destinationIndex = 0;
-    float runSpeed = 2;
+    public float runSpeed = 2;
     public Transform[] points;
     public Transform player;
     private NavMeshAgent agent;
@@ -33,7 +33,7 @@ public class MonsterAi : MonoBehaviour
 
     public void SetMobSize()
     {
-        if (Vector3.Distance(transform.position, player.position) <= detectDistance + 1) 
+        if (Vector3.Distance(transform.position, player.position) <= detectDistance + 2)
         {
             iTween.ScaleTo(gameObject, Vector3.one, 0.5f);
         }

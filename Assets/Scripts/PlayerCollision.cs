@@ -12,6 +12,7 @@ public class PlayerCollision : MonoBehaviour
     public GameObject pickupEffect;
     public GameObject mobEffect;
     public GameObject deathEffect;
+    public GameObject loot;
     public bool animState = true;
     public GameObject cam1;
     public GameObject cam2;
@@ -51,6 +52,7 @@ public class PlayerCollision : MonoBehaviour
         if (other.gameObject.name == "Fin")
         {
             print("Score final = " + PlayerInfos.pi.GetScore());
+            SceneManager.LoadScene(2);
         }
 
 
@@ -111,12 +113,17 @@ public class PlayerCollision : MonoBehaviour
 
         if (collision.gameObject.tag == "mob" && canInstantiate)
         {
+            // disabled collision on parent object to avoid getting hit
+            collision.gameObject.transform.parent.gameObject.GetComponent<Collider>().enabled = false;
             canInstantiate = false;
             audioSource.PlayOneShot(hitSound);
 
             iTween.PunchScale(collision.gameObject.transform.parent.gameObject, new Vector3(50, 50, 50), .6f);
             print("Damage To Mob : 5");
             GameObject go = Instantiate(mobEffect, collision.transform.position, Quaternion.identity);
+
+            // Quaternion.Euler takes the x y z as value of rotation
+            Instantiate(loot, collision.transform.position + Vector3.forward, Quaternion.identity * Quaternion.Euler(90,0,0));
             Destroy(go.gameObject, 0.5f);
             // Destroy the parent object and not only the back of the mob
             Destroy(collision.gameObject.transform.parent.gameObject, 0.6f);
