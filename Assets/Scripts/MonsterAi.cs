@@ -28,6 +28,15 @@ public class MonsterAi : MonoBehaviour
     {
         Walk();
         SearchPlayer();
+        SetMobSize();
+    }
+
+    public void SetMobSize()
+    {
+        if (Vector3.Distance(transform.position, player.position) <= detectDistance + 1) 
+        {
+            iTween.ScaleTo(gameObject, Vector3.one, 0.5f);
+        }
     }
 
     public void SearchPlayer()
