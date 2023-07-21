@@ -12,6 +12,7 @@ TagManager:
   - cam3
   - checkpoint
   - fall
+  - cage
   layers:
   - Default
   - TransparentFX
