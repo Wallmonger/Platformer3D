@@ -9,6 +9,7 @@ public class PauseScript : MonoBehaviour
     public GameObject menuPause;
     public Text objectifs;
     public static int amisRestants = 3;
+    public GameObject miniMap;
 
     public void SetObjectifText ()
     {
@@ -35,6 +36,11 @@ public class PauseScript : MonoBehaviour
                 menuPause.SetActive(isPaused);  
                 Time.timeScale = 0f;
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+            miniMap.active = !miniMap.active;
         }
     }
 }

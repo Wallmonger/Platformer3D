@@ -21,6 +21,7 @@ public class HelpFriends : MonoBehaviour
             try
             {
                 cage.transform.GetChild(0).gameObject.GetComponent<Canvas>().enabled = true;
+                
             } catch(Exception e) {
                 print(e.Message);
             }
@@ -28,7 +29,7 @@ public class HelpFriends : MonoBehaviour
             
             Destroy(cage.GetComponent<MeshRenderer>(), 1.2f);
             Destroy(cage.GetComponent<BoxCollider>(), 1f);
-            StartCoroutine("RemoveBullTxt");
+            /*StartCoroutine("RemoveBullTxt");*/
         }
     }
 
@@ -55,7 +56,7 @@ public class HelpFriends : MonoBehaviour
 
     IEnumerator RemoveBullTxt ()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         cage.transform.GetChild(0).gameObject.GetComponent<Canvas>().enabled = false;
     }
 }
