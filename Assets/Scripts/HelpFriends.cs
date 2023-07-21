@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,17 @@ public class HelpFriends : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && canOpen)
         {
+            PauseScript.amisRestants--;
             iTween.ShakeScale(cage, new Vector3(145, 145, 145), 1f);
-            cage.transform.GetChild(0).gameObject.GetComponent<Canvas>().enabled = true;
+
+            try
+            {
+                cage.transform.GetChild(0).gameObject.GetComponent<Canvas>().enabled = true;
+            } catch(Exception e) {
+                print(e.Message);
+            }
+
+            
             Destroy(cage.GetComponent<MeshRenderer>(), 1.2f);
             Destroy(cage.GetComponent<BoxCollider>(), 1f);
             StartCoroutine("RemoveBullTxt");
