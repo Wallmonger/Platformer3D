@@ -157,10 +157,12 @@ public class PlayerCollision : MonoBehaviour
         {
             yield return new WaitForSeconds(.2f);
             rend.enabled = !rend.enabled;    
+            rend.material.color = Color.red;    
         }
 
         yield return new WaitForSeconds(.2f);
         rend.enabled = true;
+        rend.material.color = Color.black;
         isInvincible = false;
     }
 
