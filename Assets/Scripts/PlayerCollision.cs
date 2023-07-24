@@ -24,6 +24,7 @@ public class PlayerCollision : MonoBehaviour
     public SkinnedMeshRenderer rend;
     public PlayerController playerController;
     Collider otherVar;
+    Collider otherVarEnter;
 
     // OnTriggerEnter detect all objects with the property "isTrigger(true)" in collision with the gameObject
 
@@ -39,8 +40,10 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        otherVarEnter = other;
         if(other.gameObject.tag == "coin")
         {
+            
             // Quand une pièce est rammassée, une instance de notre système de particule est appelée, à la position de la pièce touchée, et une rotation de base (Quaternion.identity)
             // On enregistre le tout dans une variable de type GameObject pour pouvoir effectuer la suppression au cours du temps
             audioSource.PlayOneShot(coinSound);
@@ -58,36 +61,43 @@ public class PlayerCollision : MonoBehaviour
             SceneManager.LoadScene(2);
         }
 
-
+        
         // Gestion de la caméra
-        if(other.gameObject.tag == "cam1")
+        Invoke("MyOnTriggerEnter", 0.2f);
+    }
+
+    public void MyOnTriggerEnter()
+    {
+        if (otherVarEnter.gameObject.tag == "cam1")
         {
             cam1.SetActive(true);
             playerController.camActive = 1;
         }
-        
-        else if (other.gameObject.tag == "cam2")
+
+        else if (otherVarEnter.gameObject.tag == "cam2")
         {
             cam2.SetActive(true);
             playerController.camActive = 2;
         }
 
-        else if (other.gameObject.tag == "cam3")
+        else if (otherVarEnter.gameObject.tag == "cam3")
         {
             cam3.SetActive(true);
             playerController.camActive = 3;
         }
     }
 
-
     private void OnTriggerExit(Collider other)
     {
         otherVar = other;
         // Invoke permet d'appeler une fonction avec un délai
-        Invoke("MyOnTriggerExit", 0.2f);
+        Invoke("MyOnTriggerExit", 1f);
     }
 
-    public void MyOnTriggerExit (Collider other)
+
+    
+
+    public void MyOnTriggerExit ()
     {
         if (otherVar.gameObject.tag == "cam1")
         {
