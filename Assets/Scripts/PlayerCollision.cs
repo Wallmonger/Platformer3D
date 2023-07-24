@@ -62,16 +62,19 @@ public class PlayerCollision : MonoBehaviour
         if(other.gameObject.tag == "cam1")
         {
             cam1.SetActive(true);
+            playerController.camActive = 1;
         }
         
         else if (other.gameObject.tag == "cam2")
         {
             cam2.SetActive(true);
+            playerController.camActive = 2;
         }
 
         else if (other.gameObject.tag == "cam3")
         {
             cam3.SetActive(true);
+            playerController.camActive = 3;
         }
     }
 
@@ -81,15 +84,18 @@ public class PlayerCollision : MonoBehaviour
          if (other.gameObject.tag == "cam1")
         {
             cam1.SetActive(false);
+            playerController.camActive = 0;
         }
         else if (other.gameObject.tag == "cam2")
         {
             cam2.SetActive(false);
+            playerController.camActive = 0;
         }
 
          else if (other.gameObject.tag == "cam3")
         {
             cam3.SetActive(false);
+            playerController.camActive = 0;
         }
     }
 

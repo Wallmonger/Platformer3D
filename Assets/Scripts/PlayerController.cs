@@ -35,10 +35,10 @@ public class PlayerController : MonoBehaviour
                 moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
                 break;
             case 1:
-                moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+                moveDir = new Vector3(-Input.GetAxis("Vertical") * moveSpeed, moveDir.y, Input.GetAxis("Horizontal") * moveSpeed);
                 break;
             case 2:
-                moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+                moveDir = new Vector3(-Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, -Input.GetAxis("Vertical") * moveSpeed);
                 break;
             case 3:
                 moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
