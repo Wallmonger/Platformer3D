@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDir;
     private Animator anim;
     bool isWalking = false;
+    public int camActive = 0;
 
     private void Start()
     {
@@ -27,8 +28,27 @@ public class PlayerController : MonoBehaviour
     {   // ###  Calcul de la direction ###
         // Nous enregistrons un nouveau vector3 pour les axes horizontaux et verticaux (x, y, z) ce qui permet d'avoir les différents axes par défaut (projetSettings/InputManager)
         // Pour l'axe y, nous ne touchons rien car le personnage ne peut pas voler
+
+        switch (camActive)  // Vérification de la caméra utilisée pour changer les inputs utilisateurs
+        {
+            case 0:
+                moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+                break;
+            case 1:
+                moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+                break;
+            case 2:
+                moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+                break;
+            case 3:
+                moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+                break;
+            default :
+                moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+                break;
+        }
         
-        moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
+        
 
         // ### Vérification de la touche espace depuis l'InputManager ###
         // CharacterCoontroller.isGrounded vérifie que le personnage touche une surface solide

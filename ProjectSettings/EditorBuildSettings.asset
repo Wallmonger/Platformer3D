@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelBoss.unity
     guid: 891ee692d619dd443bb6218630ed2a8c
+  - enabled: 1
+    path: Assets/Scenes/Saving1.unity
+    guid: 4385bfc352529484d9d68a70accbd218
+  - enabled: 1
+    path: Assets/Scenes/Saving2.unity
+    guid: 82b403decc74961409ed0a24d679e239
   m_configObjects: {}

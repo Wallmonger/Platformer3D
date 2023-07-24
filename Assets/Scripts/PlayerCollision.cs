@@ -22,6 +22,7 @@ public class PlayerCollision : MonoBehaviour
     public AudioClip deathSound;
     private AudioSource audioSource;
     public SkinnedMeshRenderer rend;
+    public PlayerController playerController;
 
     // OnTriggerEnter detect all objects with the property "isTrigger(true)" in collision with the gameObject
 
@@ -30,6 +31,7 @@ public class PlayerCollision : MonoBehaviour
     {
         // On instancie la variable audioSource pour la connecter à notre composant, et ainsi accéder à ses méthodes telles que playOneShot pour jouer nos sons.
         audioSource = GetComponent<AudioSource>();
+        playerController = GetComponent<PlayerController>();
     }
 
 
