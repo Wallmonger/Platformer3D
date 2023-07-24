@@ -23,6 +23,7 @@ public class PlayerCollision : MonoBehaviour
     private AudioSource audioSource;
     public SkinnedMeshRenderer rend;
     public PlayerController playerController;
+    Collider otherVar;
 
     // OnTriggerEnter detect all objects with the property "isTrigger(true)" in collision with the gameObject
 
@@ -81,18 +82,25 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-         if (other.gameObject.tag == "cam1")
+        otherVar = other;
+        // Invoke permet d'appeler une fonction avec un délai
+        Invoke("MyOnTriggerExit", 0.2f);
+    }
+
+    public void MyOnTriggerExit (Collider other)
+    {
+        if (otherVar.gameObject.tag == "cam1")
         {
             cam1.SetActive(false);
             playerController.camActive = 0;
         }
-        else if (other.gameObject.tag == "cam2")
+        else if (otherVar.gameObject.tag == "cam2")
         {
             cam2.SetActive(false);
             playerController.camActive = 0;
         }
 
-         else if (other.gameObject.tag == "cam3")
+        else if (otherVar.gameObject.tag == "cam3")
         {
             cam3.SetActive(false);
             playerController.camActive = 0;

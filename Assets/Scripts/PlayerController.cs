@@ -31,14 +31,11 @@ public class PlayerController : MonoBehaviour
 
         switch (camActive)  // Vérification de la caméra utilisée pour changer les inputs utilisateurs
         {
-            case 0:
-                moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
-                break;
             case 1:
                 moveDir = new Vector3(-Input.GetAxis("Vertical") * moveSpeed, moveDir.y, Input.GetAxis("Horizontal") * moveSpeed);
                 break;
             case 2:
-                moveDir = new Vector3(-Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, -Input.GetAxis("Vertical") * moveSpeed);
+                moveDir = new Vector3(Input.GetAxis("Vertical") * moveSpeed, moveDir.y, -Input.GetAxis("Horizontal") * moveSpeed);
                 break;
             case 3:
                 moveDir = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDir.y, Input.GetAxis("Vertical") * moveSpeed);
